@@ -88,8 +88,10 @@ if (isset($_REQUEST['searchInstance'])) {
 			<td class="ccm-file-list-starred"><img src="<?=ASSETS_URL_IMAGES?>/icons/<?=$star_icon?>" height="16" width="16" border="0" class="ccm-star" /></td>
 			<? foreach($columns->getColumns() as $col) { ?>
 				<? // special one for keywords ?>				
-				<? if ($col->getColumnKey() == 'fvTitle') { ?>
-					<td class="ccm-file-list-filename"><?=$txt->highlightSearch($fv->getTitle(), $keywords)?></td>		
+				<? if ($col->getColumnKey() == 'fvTitle') { 
+					$fvTitle = ($txt->highlightSearch($fv->getTitle(), $keywords) !== null) ? $txt->highlightSearch($fv->getTitle(), $keywords) : $fv->getTitle();
+				?>
+					<td class="ccm-file-list-filename"><?=$fvTitle?></td>		
 				<? } else { ?>
 					<td><?=$col->getColumnValue($f)?></td>
 				<? } ?>
